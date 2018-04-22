@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<style media="screen" type="text/css">
+body {font-family: Tahoma, Geneva, sans-serif; margin: 1em 2em 1em 2em; font-size: 100%; line-height: 130%;}
+h1, h2, h3, h4, h5, h6 {font-family: Trebuchet MS, Helvetica, sans-serif; font-weight: bold; line-height:100%; margin-top: 1.5em; margin-bottom: 0.5em;}
+h1 {font-size: 2.6em; color: #000000;}
+h2 {font-size: 2.2em; color: #404040;}
+h3 {font-size: 1.8em; color: #707070;}
+h4 {font-size: 1.4em; color: #909090;}
+h5 {font-size: 1.3em; color: #989898;}
+h6 {font-size: 1.2em; color: #9c9c9c;}
+p, pre, blockquote, table, ul, ol, dl {margin-top: 1em; margin-bottom: 1em;}
+ul ul, ul ol, ol ol, ol ul {margin-top: 0.5em; margin-bottom: 0.5em;}
+li {margin: 0.3em auto;}
+ul {margin-left: 2em; padding-left: 0.5em;}
+dt {font-weight: bold;}
+img {border: none;}
+pre {border-left: 1px solid #ccc; margin-left: 2em; padding-left: 0.5em;}
+blockquote {padding: 0.4em; background-color: #f6f5eb;}
+th, td {border: 1px solid #ccc; padding: 0.3em;}
+th {background-color: #f0f0f0;}
+hr {border: none; border-top: 1px solid #ccc; width: 100%;}
+del {text-decoration: line-through; color: #777777;}
+.toc li {list-style-type: none;}
+.todo {font-weight: bold; background-color: #f0ece8; color: #a03020;}
+.justleft {text-align: left;}
+.justright {text-align: right;}
+.justcenter {text-align: center;}
+.center {margin-left: auto; margin-right: auto;}
+.tag {background-color: #eeeeee; font-family: monospace; padding: 2px;}
+
+/* classes for items of todo lists */
+.done0 {
+    /* list-style: none; */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAxQAAAMUBHc26qAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAA7SURBVCiR7dMxEgAgCANBI3yVRzF5KxNbW6wsuH7LQ2YKQK1mkswBVERYF5Os3UV3gwd/jF2SkXy66gAZkxS6BniubAAAAABJRU5ErkJggg==);
+    background-repeat: no-repeat;
+    background-position: 0 .2em;
+    padding-left: 1.5em;
+}
+.done1 {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAxQAAAMUBHc26qAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABtSURBVCiR1ZO7DYAwDER9BDmTeZQMFXmUbGYpOjrEryA0wOvO8itOslFrJYAug5BMM4BeSkmjsrv3aVTa8p48Xw1JSkSsWVUFwD05IqS1tmYzk5zzae9jnVVVzGyXb8sALjse+euRkEzu/uirFomVIdDGOLjuAAAAAElFTkSuQmCC);
+    background-repeat: no-repeat;
+    background-position: 0 .15em;
+    padding-left: 1.5em;
+}
+.done2 {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAxQAAAMUBHc26qAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAB1SURBVCiRzdO5DcAgDAVQGxjAYgTvxlDIu1FTIRYAp8qlFISkSH7l5kk+ZIwxKiI2mIyqWoeILYRgZ7GINDOLjnmF3VqklKCUMgTee2DmM661Qs55iI3Zm/1u5h9sm4ig9z4ERHTFzLyd4G4+nFlVrYg8+qoF/c0kdpeMsmcAAAAASUVORK5CYII=);
+    background-repeat: no-repeat;
+    background-position: 0 .15em;
+    padding-left: 1.5em;
+}
+.done3 {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAxQAAAMUBHc26qAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABoSURBVCiR7dOxDcAgDATA/0DtUdiKoZC3YhLkHjkVKF3idJHiztKfvrHZWnOSE8Fx95RJzlprimJVnXktvXeY2S0SEZRSAAAbmxnGGKH2I5T+8VfxPhIReQSuuY3XyYWa3T2p6quvOgGrvSFGlewuUAAAAABJRU5ErkJggg==);
+    background-repeat: no-repeat;
+    background-position: 0 .15em;
+    padding-left: 1.5em;
+}
+.done4 {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAQCAYAAAAbBi9cAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAzgAAAM4BlP6ToAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAIISURBVDiNnZQ9SFtRFMd/773kpTaGJoQk1im4VDpWQcTNODhkFBcVTCNCF0NWyeDiIIiCm82QoIMIUkHUxcFBg1SEQoZszSat6cdTn1qNue92CMbEr9Sey+XC/Z/zu+f8h6ukUil3sVg0+M+4cFxk42/jH2wAqqqKSCSiPQdwcHHAnDHH9s/tN1h8V28ETdP+eU8fT9Nt62ancYdIPvJNtsu87bmjrJlrTDVM4RROJs1JrHPrD4Bar7A6cpc54iKOaTdJXCUI2UMVrQZ0Js7YPN18ECKkYNQcJe/OE/4dZsw7VqNXQMvHy3QZXQypQ6ycrtwDjf8aJ+PNEDSCzLpn7+m2pD8ZKHlKarYhy6XjEoCYGcN95qansQeA3fNdki+SaJZGTMQIOoL3W/Z89rxv+tokubNajlvk/vm+LFpF2XnUKZHI0I+QrI7Dw0OZTqdzUkpsM7mZTyfy5OPGyw1tK7AFSvmB/Ks8w8YwbUYbe6/3QEKv0vugfxWPnMLJun+d/kI/WLdizpNjMbAIKrhMF4OuwadBALqqs+RfInwUvuNi+fBd+wjogfogAFVRmffO02q01mZZ0HHdgXIzdz0QQLPezIQygX6llxNKKgOFARYCC49CqhoHIUTlss/Vx2phlYwjw8j1CAlfAiwQiJpiy7o1VHnsG5FISkoJu7Q/2YmmaV+i0ei7v38L2CBguSi5AAAAAElFTkSuQmCC);
+    background-repeat: no-repeat;
+    background-position: 0 .15em;
+    padding-left: 1.5em;
+}
+
+code {
+    font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    padding: 0px 3px;
+    display: inline-block;
+    color: #52595d;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+</style>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>sorting and lamba</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<div id="sorting"><h1 id="sorting">sorting</h1></div>
+
+<div id="sorting-vectors"><h2 id="vectors">vectors</h2></div>
+
+<p>
+Vectors are sorted with the sort() function available in #include
+&lt;algorithm&gt;
+</p>
+
+<pre>
+std::vector&lt;int&gt; vec;
+init(vec);
+sort(vec.begin(), vec.end());
+</pre>
+
+<div id="sorting-vectors-objects"><h3 id="objects">objects</h3></div>
+
+<p>
+Objects cannot be sorted without overloading the '&lt;' operator, since the
+compiler has no way of telling how to compare two objects you created.
+</p>
+
+<pre>
+class Number{
+public:
+	bool operator&lt;(const Number&amp; n) const {
+		return number &lt; n.number;
+	}
+private:
+	int number;
+};
+</pre>
+
+<p>
+Sorting is then used the same way as primitive types.
+</p>
+
+<pre>
+std::vector&lt;Number&gt; vec;
+init(vec);
+sort(vec.begin(), vec.end());
+</pre>
+
+
+<div id="sorting-vectors-Pointers"><h3 id="Pointers">Pointers</h3></div>
+
+<p>
+Pointers are different since sort would try to sort the memory by default,
+and not the objects themselves. We need to create a comparison function
+ourselves that will perform the comparison on the actual data. We do this
+here in a class, but this can also be a local function.
+</p>
+
+<pre>
+class NumberLess{
+public:
+	bool operator()(const Number* lhs, const Number* rhs) const {
+		return lhs-&gt;getNumber() &lt; rhs-&gt;getNumber();
+	}
+};
+</pre>
+
+<p>
+We then need to add this function as an argument to the sort function
+</p>
+
+<pre>
+std::vector&lt;Number*&gt; vec;
+init(vec);
+sort(vec.begin(), vec.end(), NumberLess());
+</pre>
+
+
+<div id="sorting-Lists"><h2 id="Lists">Lists</h2></div>
+
+<p>
+Lists are different, in they they use &lt;var&gt;.sort() instead of
+sort(iterator, iterator)
+</p>
+
+<p>
+Lists follow the exact same rules as above for using objects and object
+pointers.
+</p>
+
+<pre>
+std::list&lt;type&gt; mylist;
+init(mylist);
+mylist.sort([optional comparison function]0;
+</pre>
+
+
+<div id="sorting-Lamda functions"><h2 id="Lamda functions">Lamda functions</h2></div>
+
+<p>
+In the case we need a quick function for comparing objects for a sort, we
+can write an inline lambda function.
+</p>
+
+<p>
+For example, the following using a lamda function to perform a greater than
+compare rather than the default less than
+</p>
+
+<pre>
+mylist.sort([](const Number* a, const Number* b)-&gt;bool{return (*a) &gt; (*b);}
+</pre>
+
+
+<div id="Searching"><h1 id="Searching">Searching</h1></div>
+
+<div id="Searching-Lists"><h2 id="Lists">Lists</h2></div>
+
+<p>
+To search a list, we can use the find() function as follows:
+</p>
+
+<pre>
+std::list&lt;int&gt; mylist;
+init(mylist);
+int number = rand()%100;
+
+const auto&amp; it = find(mylist.begin(), mylist.end(), number);
+
+if( it == mylist.end())
+	cout &lt;&lt; "not found" &lt;&lt; endl;
+else
+	cout &lt;&lt; "found" &lt;&lt; endl;
+
+
+</pre>
+
+<div id="Searching-Lists with predicate"><h2 id="Lists with predicate">Lists with predicate</h2></div>
+
+<p>
+You can use the find_if function to add a predicate to the find function,
+where it will return an iterator to the item that matches the predicate
+</p>
+
+<pre>
+class Target{
+public:
+	Target(int n): number(n) {}
+	bool operator()(const Number* rhs) const {
+		return number == rhs-&gt;getNumber();
+	}
+};
+
+std::list&lt;Number*&gt;::iterator it = find_if(numberList.begin(),
+numberList.end(), Target(rand()%50));
+</pre>
+
+<div id="Searching-Maps"><h2 id="Maps">Maps</h2></div>
+
+<p>
+Searching a map is done in a similar way, where we use the find function
+</p>
+
+<pre>
+std::map&lt;std::string, int&gt; mymap;
+
+if(mymap.find("string") != mymap.end())
+	cout &lt;&lt; "found" &lt;&lt; endl;
+else
+	cout &lt;&lt; "not found" &lt;&lt; endl;
+</pre>
+
+<div id="Lambda Functions"><h1 id="Lambda Functions">Lambda Functions</h1></div>
+
+<p>
+Lambda functions exist in the form of :
+</p>
+
+<p>
+<code>[capture clause] (parameters) -&gt; return-type {body}</code>
+</p>
+
+<p>
+They are mainly used for inlining a function that you will not need to use
+multiple times.
+</p>
+
+<p>
+For example, making an int randomly positive or negative:
+</p>
+
+<pre>
+int x = 20;
+auto maybe=[](int &amp;x)-&gt;int{ if(rand()%2==0) return x; else return x*-1;}
+x = maybe(x);
+</pre>
+
+<div id="Lambda Functions-std::function"><h2 id="std::function">std::function</h2></div>
+
+<p>
+std::function appears to be a placeholder for a lambda fucntion, where you
+can give a function a variable. In this way, we dont need to use the "-&gt;"
+directive from lambda functions as the return type is set in the function
+definiiton.
+</p>
+
+<pre>
+//std::fucntion&lt;return_type(args)&gt; func;
+std::fucntion&lt;int(int)&gt; func = [](int x) { return rand()%x };
+</pre>
+
+</body>
+</html>
